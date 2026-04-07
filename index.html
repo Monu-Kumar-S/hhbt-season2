@@ -464,6 +464,231 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 /* Qualifying indicator */
 .qualifying-row td { background: rgba(57,255,20,0.04) !important; }
 .qualifying-row td:first-child { border-left: 3px solid var(--neon-green); }
+
+/* ── LOGIN PAGE ───────────────────────────────────────────── */
+.login-page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem; position: relative; overflow: hidden;
+}
+.login-court-bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,71,42,0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(57,255,20,0.06) 0%, transparent 60%),
+    var(--dark-bg);
+}
+/* animated court lines */
+.login-court-lines {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.login-court-lines::before {
+  content: '';
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(82,183,136,0.12) 30%, rgba(82,183,136,0.12) 70%, transparent);
+}
+.login-court-lines::after {
+  content: '';
+  position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(82,183,136,0.1) 30%, rgba(82,183,136,0.1) 70%, transparent);
+}
+.login-shuttle {
+  position: fixed; font-size: 6rem; opacity: 0.04; z-index: 0; pointer-events: none;
+  animation: floatShuttle 18s ease-in-out infinite;
+  top: 10%; right: 8%; filter: blur(1px);
+}
+.login-shuttle2 {
+  position: fixed; font-size: 4rem; opacity: 0.03; z-index: 0; pointer-events: none;
+  animation: floatShuttle2 24s ease-in-out infinite;
+  bottom: 15%; left: 6%; filter: blur(1px);
+}
+@keyframes floatShuttle  { 0%,100%{transform:translateY(0) rotate(0deg)} 33%{transform:translateY(-30px) rotate(15deg)} 66%{transform:translateY(15px) rotate(-10deg)} }
+@keyframes floatShuttle2 { 0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(20px) rotate(-20deg)} 70%{transform:translateY(-15px) rotate(10deg)} }
+
+.login-wrap {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 420px;
+  animation: loginSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes loginSlideUp { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+
+.login-brand {
+  text-align: center; margin-bottom: 2rem;
+}
+.login-logo-ring {
+  width: 80px; height: 80px; margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--court-green) 0%, #0d2e14 100%);
+  border: 2px solid var(--court-line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem;
+  box-shadow: 0 0 0 6px rgba(82,183,136,0.08), 0 0 40px rgba(57,255,20,0.15);
+  animation: ringPulse 3s ease-in-out infinite;
+}
+@keyframes ringPulse { 0%,100%{box-shadow:0 0 0 6px rgba(82,183,136,0.08),0 0 40px rgba(57,255,20,0.15)} 50%{box-shadow:0 0 0 10px rgba(82,183,136,0.04),0 0 60px rgba(57,255,20,0.25)} }
+.login-brand-title {
+  font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 0.15em;
+  color: var(--neon-green); line-height: 1;
+  text-shadow: 0 0 30px rgba(57,255,20,0.35);
+}
+.login-brand-sub {
+  font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 0.3rem;
+}
+
+.login-card {
+  background: rgba(17,24,17,0.92);
+  border: 1px solid var(--dark-border);
+  border-radius: 20px; overflow: hidden;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,183,136,0.05);
+}
+
+/* mode toggle tabs */
+.login-tabs {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--dark-border);
+}
+.login-tab {
+  padding: 1rem; text-align: center; cursor: pointer;
+  font-family: 'Rajdhani'; font-weight: 700; font-size: 0.85rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted); background: transparent; border: none;
+  transition: all 0.25s; position: relative;
+}
+.login-tab::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: transparent; transition: background 0.25s;
+}
+.login-tab.active { color: var(--neon-green); background: rgba(57,255,20,0.04); }
+.login-tab.active::after { background: var(--neon-green); }
+.login-tab:hover:not(.active) { color: var(--text-primary); background: rgba(255,255,255,0.02); }
+
+.login-tab-icon { font-size: 1.2rem; display: block; margin-bottom: 0.2rem; }
+
+.login-body { padding: 1.75rem; }
+
+/* guest panel */
+.guest-panel { text-align: center; }
+.guest-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.guest-title { font-family: 'Bebas Neue'; font-size: 1.6rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+.guest-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; }
+.guest-perms {
+  background: var(--dark-card2); border: 1px solid var(--dark-border);
+  border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; text-align: left;
+}
+.guest-perm-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+.perm-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; font-weight: 500; padding: 0.2rem 0;
+}
+.perm-allow { color: var(--court-line); }
+.perm-deny  { color: var(--text-muted); text-decoration: line-through; opacity: 0.5; }
+.perm-dot-allow { width: 6px; height: 6px; border-radius: 50%; background: var(--neon-green); flex-shrink: 0; }
+.perm-dot-deny  { width: 6px; height: 6px; border-radius: 50%; background: var(--dark-border); flex-shrink: 0; }
+
+/* admin panel */
+.admin-panel-title { font-family: 'Bebas Neue'; font-size: 1.4rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+.admin-panel-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+
+.login-input-wrap { position: relative; margin-bottom: 1rem; }
+.login-input-icon {
+  position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%);
+  font-size: 1rem; pointer-events: none; opacity: 0.5;
+}
+.login-input {
+  width: 100%; padding: 0.75rem 0.9rem 0.75rem 2.6rem;
+  background: var(--dark-card2); border: 1px solid var(--dark-border);
+  border-radius: 10px; color: var(--text-primary);
+  font-family: 'Rajdhani'; font-size: 1rem; font-weight: 600;
+  outline: none; transition: all 0.2s;
+}
+.login-input:focus { border-color: var(--court-line); box-shadow: 0 0 0 3px rgba(82,183,136,0.1); }
+.login-input.shake { animation: inputShake 0.4s ease; }
+@keyframes inputShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+.login-input.err { border-color: var(--red-score); box-shadow: 0 0 0 3px rgba(255,59,48,0.1); }
+
+.login-eye {
+  position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem;
+  transition: color 0.2s; padding: 0;
+}
+.login-eye:hover { color: var(--text-primary); }
+
+.login-error {
+  background: rgba(255,59,48,0.08); border: 1px solid rgba(255,59,48,0.25);
+  border-radius: 8px; padding: 0.6rem 0.9rem;
+  color: var(--red-score); font-size: 0.85rem; font-weight: 600;
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+  animation: loginSlideUp 0.3s ease;
+}
+
+.btn-login {
+  width: 100%; padding: 0.85rem; border-radius: 10px; border: none;
+  font-family: 'Rajdhani'; font-weight: 700; font-size: 1rem; letter-spacing: 0.08em;
+  text-transform: uppercase; cursor: pointer; transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.btn-login-guest {
+  background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-light) 100%);
+  color: var(--neon-green); border: 1px solid rgba(82,183,136,0.3);
+  box-shadow: 0 4px 20px rgba(26,71,42,0.5);
+}
+.btn-login-guest:hover { box-shadow: 0 4px 30px rgba(57,255,20,0.2); transform: translateY(-1px); }
+.btn-login-admin {
+  background: linear-gradient(135deg, #1a1200 0%, #2a1f00 100%);
+  color: var(--gold); border: 1px solid rgba(255,215,0,0.25);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.btn-login-admin:hover { box-shadow: 0 4px 30px rgba(255,215,0,0.15); transform: translateY(-1px); }
+.btn-login:active { transform: translateY(0); }
+.btn-login:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* loading spinner inside button */
+.btn-spin { display: inline-block; width: 14px; height: 14px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+.login-hint { text-align: center; margin-top: 1rem; font-size: 0.78rem; color: var(--text-muted); }
+.login-hint strong { color: var(--court-line); }
+
+/* user chip in header */
+.user-chip {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--dark-card2); border: 1px solid var(--dark-border);
+  border-radius: 20px; padding: 0.3rem 0.75rem 0.3rem 0.4rem;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+  cursor: default;
+}
+.user-chip-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+}
+.user-chip.admin .user-chip-avatar { background: rgba(255,215,0,0.15); color: var(--gold); }
+.user-chip.guest .user-chip-avatar { background: rgba(82,183,136,0.15); color: var(--court-line); }
+.user-chip.admin { border-color: rgba(255,215,0,0.2); color: var(--gold); }
+.user-chip.guest { border-color: rgba(82,183,136,0.2); color: var(--court-line); }
+
+.logout-btn {
+  background: none; border: none; color: var(--text-muted); cursor: pointer;
+  font-size: 0.85rem; padding: 0.3rem 0.5rem; border-radius: 6px;
+  transition: all 0.2s; font-family: 'Rajdhani'; font-weight: 600;
+}
+.logout-btn:hover { color: var(--red-score); background: rgba(255,59,48,0.08); }
+
+/* admin-only dimming for guest */
+.admin-only-lock {
+  position: relative; pointer-events: none;
+  filter: blur(1px) grayscale(0.4); opacity: 0.45;
+}
+.admin-lock-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(10,15,10,0.7); border-radius: 12px; gap: 0.5rem;
+  backdrop-filter: blur(2px); pointer-events: all;
+}
+.admin-lock-icon { font-size: 2rem; }
+.admin-lock-msg { font-family: 'Bebas Neue'; font-size: 1.2rem; color: var(--text-muted); letter-spacing: 0.1em; }
+.admin-lock-sub { font-size: 0.8rem; color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -521,6 +746,181 @@ const csvExport = (teams) => {
   a.download = 'hamilton_homes_teams.csv'; a.click();
 };
 
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'hhbt2024';
+
+const AuthContext = React.createContext(null);
+const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState(() => loadFromLS('hhbt_auth', null));
+  const login = useCallback((role, username = '') => {
+    const user = { role, username: role === 'admin' ? username : 'Guest', loginTime: Date.now() };
+    setAuth(user);
+    saveToLS('hhbt_auth', user);
+  }, []);
+  const logout = useCallback(() => {
+    setAuth(null);
+    saveToLS('hhbt_auth', null);
+  }, []);
+  return <AuthContext.Provider value={{ auth, login, logout }}>{children}</AuthContext.Provider>;
+};
+const useAuth = () => React.useContext(AuthContext);
+
+// ─── LOGIN PAGE ───────────────────────────────────────────────────────────────
+function LoginPage() {
+  const { login } = useAuth();
+  const [mode, setMode] = useState('guest'); // 'guest' | 'admin'
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [shakeUser, setShakeUser] = useState(false);
+  const [shakePw, setShakePw] = useState(false);
+
+  const handleGuestLogin = () => {
+    setLoading(true);
+    setTimeout(() => { login('guest'); setLoading(false); }, 600);
+  };
+
+  const handleAdminLogin = () => {
+    setError('');
+    if (!username.trim()) { setShakeUser(true); setTimeout(()=>setShakeUser(false),500); return; }
+    if (!password) { setShakePw(true); setTimeout(()=>setShakePw(false),500); return; }
+    setLoading(true);
+    setTimeout(() => {
+      if (username.trim() === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        login('admin', username.trim());
+      } else {
+        setError('Invalid credentials. Please try again.');
+        setShakeUser(true); setShakePw(true);
+        setTimeout(() => { setShakeUser(false); setShakePw(false); }, 500);
+        setPassword('');
+      }
+      setLoading(false);
+    }, 800);
+  };
+
+  const onKeyDown = (e) => { if (e.key === 'Enter') handleAdminLogin(); };
+
+  return (
+    <div className="login-page">
+      <div className="login-court-bg" />
+      <div className="login-court-lines" />
+      <div className="login-shuttle">🏸</div>
+      <div className="login-shuttle2">🏸</div>
+
+      <div className="login-wrap">
+        {/* Brand */}
+        <div className="login-brand">
+          <div className="login-logo-ring">🏸</div>
+          <div className="login-brand-title">Hamilton Homes</div>
+          <div className="login-brand-sub">Badminton Tournament · Season 2</div>
+        </div>
+
+        {/* Card */}
+        <div className="login-card">
+          {/* Mode tabs */}
+          <div className="login-tabs">
+            <button className={`login-tab ${mode === 'guest' ? 'active' : ''}`} onClick={() => { setMode('guest'); setError(''); }}>
+              <span className="login-tab-icon">👁</span>
+              Spectator
+            </button>
+            <button className={`login-tab ${mode === 'admin' ? 'active' : ''}`} onClick={() => { setMode('admin'); setError(''); }}>
+              <span className="login-tab-icon">🛡</span>
+              Admin
+            </button>
+          </div>
+
+          <div className="login-body">
+            {mode === 'guest' ? (
+              /* ── GUEST ── */
+              <div className="guest-panel">
+                <div className="guest-icon">👁️</div>
+                <div className="guest-title">Spectator Access</div>
+                <div className="guest-desc">
+                  Watch the tournament live — scores, standings, fixtures and results.<br/>
+                  No credentials needed.
+                </div>
+                <div className="guest-perms">
+                  <div className="guest-perm-title">What you can access</div>
+                  {[
+                    { label: 'View Dashboard & Live Scores', allow: true },
+                    { label: 'View Group Standings', allow: true },
+                    { label: 'View Match Fixtures', allow: true },
+                    { label: 'View Knockout Bracket', allow: true },
+                    { label: 'TV Display Mode', allow: true },
+                    { label: 'Register / Edit Teams', allow: false },
+                    { label: 'Start / Score Matches', allow: false },
+                    { label: 'Admin Controls', allow: false },
+                  ].map(p => (
+                    <div key={p.label} className="perm-item">
+                      <span className={p.allow ? 'perm-dot-allow' : 'perm-dot-deny'} />
+                      <span className={p.allow ? 'perm-allow' : 'perm-deny'}>{p.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="btn-login btn-login-guest" onClick={handleGuestLogin} disabled={loading}>
+                  {loading ? <><span className="btn-spin"/>Entering...</> : '👁 Enter as Spectator'}
+                </button>
+              </div>
+            ) : (
+              /* ── ADMIN ── */
+              <div>
+                <div className="admin-panel-title">🛡 Admin Login</div>
+                <div className="admin-panel-sub">Full tournament control — scoring, fixtures, team management.</div>
+
+                {error && (
+                  <div className="login-error">
+                    <span>⚠</span> {error}
+                  </div>
+                )}
+
+                <div className="login-input-wrap">
+                  <span className="login-input-icon">👤</span>
+                  <input
+                    className={`login-input ${shakeUser ? 'shake' : ''}`}
+                    placeholder="Username"
+                    value={username}
+                    onChange={e => { setUsername(e.target.value); setError(''); }}
+                    onKeyDown={onKeyDown}
+                    autoComplete="username"
+                  />
+                </div>
+
+                <div className="login-input-wrap">
+                  <span className="login-input-icon">🔑</span>
+                  <input
+                    className={`login-input ${shakePw ? 'shake' : ''}`}
+                    placeholder="Password"
+                    type={showPw ? 'text' : 'password'}
+                    value={password}
+                    onChange={e => { setPassword(e.target.value); setError(''); }}
+                    onKeyDown={onKeyDown}
+                    autoComplete="current-password"
+                    style={{paddingRight:'2.8rem'}}
+                  />
+                  <button className="login-eye" onClick={() => setShowPw(v => !v)} tabIndex={-1}>
+                    {showPw ? '🙈' : '👁'}
+                  </button>
+                </div>
+
+                <button className="btn-login btn-login-admin" onClick={handleAdminLogin} disabled={loading}>
+                  {loading ? <><span className="btn-spin"/>Verifying...</> : '🛡 Login as Admin'}
+                </button>
+
+                <div className="login-hint">
+                  Default credentials: <strong>admin</strong> / <strong>hhbt2024</strong>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── TOAST ───────────────────────────────────────────────────────────────────
 const ToastContext = React.createContext(null);
 const ToastProvider = ({ children }) => {
@@ -551,6 +951,10 @@ const initState = () => loadFromLS('hhbt_s2', {
 
 // ─── APP ──────────────────────────────────────────────────────────────────────
 function App() {
+  const { auth, logout } = useAuth();
+  const isAdmin = auth?.role === 'admin';
+  const isGuest = auth?.role === 'guest';
+
   const [state, setState] = useState(initState);
   const [tab, setTab] = useState('dashboard');
   const [tvMode, setTvMode] = useState(false);
@@ -569,50 +973,89 @@ function App() {
   const allTeams = state.teams;
   const teamById = useMemo(() => Object.fromEntries(allTeams.map(t => [t.id, t])), [allTeams]);
 
+  // Nav items — guests can see all tabs except admin
+  const navItems = [
+    { id: 'dashboard', label: '⚡ Dashboard', guestOk: true },
+    { id: 'teams',     label: '👥 Teams',     guestOk: true },
+    { id: 'groups',    label: '📊 Groups',    guestOk: true },
+    { id: 'matches',   label: '🏸 Matches',   guestOk: true },
+    { id: 'knockout',  label: '⚔️ Knockout',  guestOk: true },
+    { id: 'admin',     label: '🛠 Admin',     guestOk: false },
+  ];
+
+  const handleTabClick = (id, guestOk) => {
+    if (isGuest && !guestOk) return; // silently blocked — lock overlay shown on the tab content
+    setTab(id);
+  };
+
   return (
-    <ToastProvider>
-      <div className="app">
-        <header className="header">
-          <div className="header-inner">
-            <div className="logo">
-              <div className="logo-icon">🏸</div>
-              <div className="logo-text">
-                <div className="logo-title">Hamilton Homes</div>
-                <div className="logo-sub">Badminton Tournament · Season 2</div>
-              </div>
+    <div className="app">
+      <header className="header">
+        <div className="header-inner">
+          <div className="logo">
+            <div className="logo-icon">🏸</div>
+            <div className="logo-text">
+              <div className="logo-title">Hamilton Homes</div>
+              <div className="logo-sub">Badminton Tournament · Season 2</div>
             </div>
-            <nav className="nav">
-              {[
-                { id: 'dashboard', label: '⚡ Dashboard' },
-                { id: 'teams', label: '👥 Teams' },
-                { id: 'groups', label: '📊 Groups' },
-                { id: 'matches', label: '🏸 Matches' },
-                { id: 'knockout', label: '⚔️ Knockout' },
-                { id: 'admin', label: '🛠 Admin' },
-              ].map(n => (
-                <button key={n.id} className={`nav-btn ${tab === n.id ? 'active' : ''}`} onClick={() => setTab(n.id)}>
-                  {n.label}
-                  {n.id === 'matches' && liveMatches.length > 0 && <span className="live-badge"><span className="live-dot"/>{liveMatches.length}</span>}
-                </button>
-              ))}
-              <button className="btn btn-secondary btn-sm" onClick={() => setTvMode(true)}>📺 TV</button>
-            </nav>
           </div>
-        </header>
+          <nav className="nav">
+            {navItems.map(n => (
+              <button
+                key={n.id}
+                className={`nav-btn ${tab === n.id ? 'active' : ''} ${isGuest && !n.guestOk ? 'disabled' : ''}`}
+                onClick={() => handleTabClick(n.id, n.guestOk)}
+                style={isGuest && !n.guestOk ? {opacity:0.35,cursor:'not-allowed'} : {}}
+                title={isGuest && !n.guestOk ? 'Admin access required' : ''}
+              >
+                {n.label}
+                {n.id === 'matches' && liveMatches.length > 0 && <span className="live-badge"><span className="live-dot"/>{liveMatches.length}</span>}
+                {isGuest && !n.guestOk && <span style={{fontSize:'0.65rem',marginLeft:'2px'}}>🔒</span>}
+              </button>
+            ))}
+            <button className="btn btn-secondary btn-sm" onClick={() => setTvMode(true)}>📺 TV</button>
 
-        <main className="content fade-in">
-          <PhaseBanner state={state} />
-          {tab === 'dashboard' && <Dashboard state={state} update={update} teamById={teamById} setTab={setTab} liveMatches={liveMatches} upcomingMatches={upcomingMatches} />}
-          {tab === 'teams' && <Teams state={state} update={update} />}
-          {tab === 'groups' && <Groups state={state} update={update} teamById={teamById} />}
-          {tab === 'matches' && <Matches state={state} update={update} teamById={teamById} />}
-          {tab === 'knockout' && <Knockout state={state} update={update} teamById={teamById} />}
-          {tab === 'admin' && <Admin state={state} update={update} teamById={teamById} />}
-        </main>
+            {/* User chip + logout */}
+            <div className={`user-chip ${auth?.role}`}>
+              <div className="user-chip-avatar">{isAdmin ? '🛡' : '👁'}</div>
+              <span>{isAdmin ? auth.username : 'Guest'}</span>
+            </div>
+            <button className="logout-btn" onClick={logout} title="Sign out">⏏ Out</button>
+          </nav>
+        </div>
+      </header>
 
-        {tvMode && <TVMode state={state} teamById={teamById} liveMatches={liveMatches} upcomingMatches={upcomingMatches} onClose={() => setTvMode(false)} time={time} />}
+      <main className="content fade-in">
+        <PhaseBanner state={state} />
+        {tab === 'dashboard' && <Dashboard state={state} update={update} teamById={teamById} setTab={setTab} liveMatches={liveMatches} upcomingMatches={upcomingMatches} isAdmin={isAdmin} />}
+        {tab === 'teams'     && <Teams     state={state} update={update} isAdmin={isAdmin} />}
+        {tab === 'groups'    && <Groups    state={state} update={update} teamById={teamById} />}
+        {tab === 'matches'   && <Matches   state={state} update={update} teamById={teamById} isAdmin={isAdmin} />}
+        {tab === 'knockout'  && <Knockout  state={state} update={update} teamById={teamById} isAdmin={isAdmin} />}
+        {tab === 'admin'     && (
+          isAdmin
+            ? <Admin state={state} update={update} teamById={teamById} />
+            : <AdminLocked />
+        )}
+      </main>
+
+      {tvMode && <TVMode state={state} teamById={teamById} liveMatches={liveMatches} upcomingMatches={upcomingMatches} onClose={() => setTvMode(false)} time={time} />}
+    </div>
+  );
+}
+
+// ─── ADMIN LOCKED (guest trying to access admin) ───────────────────────────
+function AdminLocked() {
+  const { logout } = useAuth();
+  return (
+    <div className="card" style={{textAlign:'center',padding:'4rem 2rem'}}>
+      <div style={{fontSize:'4rem',marginBottom:'1rem'}}>🔒</div>
+      <div style={{fontFamily:'Bebas Neue',fontSize:'2rem',color:'var(--text-muted)',letterSpacing:'0.1em',marginBottom:'0.5rem'}}>Admin Access Required</div>
+      <div style={{color:'var(--text-muted)',fontSize:'0.9rem',marginBottom:'2rem',maxWidth:'380px',margin:'0 auto 2rem'}}>
+        This section requires admin credentials. Please sign out and log in as Admin to access tournament controls.
       </div>
-    </ToastProvider>
+      <button className="btn btn-secondary" onClick={logout}>⏏ Sign Out & Login as Admin</button>
+    </div>
   );
 }
 
@@ -637,13 +1080,29 @@ function PhaseBanner({ state }) {
 }
 
 // ─── DASHBOARD ────────────────────────────────────────────────────────────────
-function Dashboard({ state, update, teamById, setTab, liveMatches, upcomingMatches }) {
+function Dashboard({ state, update, teamById, setTab, liveMatches, upcomingMatches, isAdmin }) {
   const allMatches = [...state.matches, ...state.knockoutMatches];
   const completed = allMatches.filter(m => m.status === 'completed');
   const toast = useToast();
 
   return (
     <div className="fade-in">
+      {/* Guest welcome banner */}
+      {!isAdmin && (
+        <div style={{
+          background:'linear-gradient(135deg,rgba(26,71,42,0.4),rgba(17,24,17,0.6))',
+          border:'1px solid rgba(82,183,136,0.2)', borderRadius:'12px',
+          padding:'0.9rem 1.25rem', marginBottom:'1.25rem',
+          display:'flex', alignItems:'center', gap:'0.75rem',
+          backdropFilter:'blur(8px)'
+        }}>
+          <span style={{fontSize:'1.4rem'}}>👁️</span>
+          <div>
+            <div style={{fontWeight:700,fontSize:'0.9rem',color:'var(--court-line)'}}>Spectator Mode</div>
+            <div style={{fontSize:'0.78rem',color:'var(--text-muted)'}}>You're viewing live tournament data. Sign in as Admin for full controls.</div>
+          </div>
+        </div>
+      )}
       {state.champion && (
         <div className="winner-banner" style={{marginBottom:'1.5rem'}}>
           <div className="winner-trophy">🏆</div>
@@ -701,7 +1160,7 @@ function Dashboard({ state, update, teamById, setTab, liveMatches, upcomingMatch
         </div>
       </div>
 
-      {state.phase === 'registration' && (
+      {state.phase === 'registration' && isAdmin && (
         <div className="card" style={{marginTop:'1.5rem'}}>
           <div className="card-title" style={{marginBottom:'1rem'}}>🚀 Quick Start</div>
           <div style={{display:'flex',gap:'0.75rem',flexWrap:'wrap'}}>
@@ -754,7 +1213,7 @@ function StatusBadge({ status }) {
 }
 
 // ─── TEAMS ────────────────────────────────────────────────────────────────────
-function Teams({ state, update }) {
+function Teams({ state, update, isAdmin }) {
   const toast = useToast();
   const [form, setForm] = useState({ name: '', player1: '', player2: '', contact: '' });
   const [errors, setErrors] = useState({});
@@ -810,24 +1269,34 @@ function Teams({ state, update }) {
   return (
     <div className="fade-in">
       <div className="grid-2" style={{gap:'1.5rem',alignItems:'start'}}>
-        <div className="card">
-          <div className="card-header">
-            <div className="card-title">{editId ? '✏️ Edit Team' : '+ Register Team'}</div>
-            <div style={{display:'flex',gap:'0.5rem',alignItems:'center'}}>
-              <span style={{fontSize:'0.8rem',color:'var(--text-muted)'}}>{state.teams.length}/50 teams</span>
-              {editId && <button className="btn btn-ghost btn-sm" onClick={cancelEdit}>Cancel</button>}
+        {/* Registration form — admin only */}
+        <div className="card" style={{position:'relative'}}>
+          {!isAdmin && (
+            <div className="admin-lock-overlay">
+              <div className="admin-lock-icon">🔒</div>
+              <div className="admin-lock-msg">Admin Only</div>
+              <div className="admin-lock-sub">Sign in as admin to register teams</div>
             </div>
+          )}
+          <div className={!isAdmin ? 'admin-only-lock' : ''}>
+            <div className="card-header">
+              <div className="card-title">{editId ? '✏️ Edit Team' : '+ Register Team'}</div>
+              <div style={{display:'flex',gap:'0.5rem',alignItems:'center'}}>
+                <span style={{fontSize:'0.8rem',color:'var(--text-muted)'}}>{state.teams.length}/50 teams</span>
+                {editId && <button className="btn btn-ghost btn-sm" onClick={cancelEdit}>Cancel</button>}
+              </div>
+            </div>
+            {['name','player1','player2','contact'].map(field => (
+              <div className="form-group" key={field}>
+                <label className="form-label">{field === 'name' ? 'Team Name' : field === 'player1' ? 'Player 1' : field === 'player2' ? 'Player 2' : 'Contact Number'}</label>
+                <input className={`form-input ${errors[field] ? 'error' : ''}`} placeholder={field === 'contact' ? '+91 ...' : ''} value={form[field]} onChange={e => setForm(f => ({...f,[field]:e.target.value}))} onKeyDown={e => e.key === 'Enter' && handleSubmit()} />
+                {errors[field] && <div className="form-error">⚠ {errors[field]}</div>}
+              </div>
+            ))}
+            <button className="btn btn-primary" style={{width:'100%'}} onClick={handleSubmit} disabled={state.teams.length >= 50 && !editId}>
+              {editId ? '💾 Save Changes' : '+ Register Team'}
+            </button>
           </div>
-          {['name','player1','player2','contact'].map(field => (
-            <div className="form-group" key={field}>
-              <label className="form-label">{field === 'name' ? 'Team Name' : field === 'player1' ? 'Player 1' : field === 'player2' ? 'Player 2' : 'Contact Number'}</label>
-              <input className={`form-input ${errors[field] ? 'error' : ''}`} placeholder={field === 'contact' ? '+91 ...' : ''} value={form[field]} onChange={e => setForm(f => ({...f,[field]:e.target.value}))} onKeyDown={e => e.key === 'Enter' && handleSubmit()} />
-              {errors[field] && <div className="form-error">⚠ {errors[field]}</div>}
-            </div>
-          ))}
-          <button className="btn btn-primary" style={{width:'100%'}} onClick={handleSubmit} disabled={state.teams.length >= 50 && !editId}>
-            {editId ? '💾 Save Changes' : '+ Register Team'}
-          </button>
         </div>
 
         <div className="card">
@@ -853,7 +1322,7 @@ function Teams({ state, update }) {
                     <div className="team-name">{t.name}</div>
                     <div className="team-players-list">🏸 {t.player1} & {t.player2} · 📞 {t.contact}</div>
                   </div>
-                  {state.phase === 'registration' && (
+                  {isAdmin && state.phase === 'registration' && (
                     <div style={{display:'flex',gap:'0.25rem'}}>
                       <button className="btn btn-ghost btn-xs" onClick={() => startEdit(t)}>✏️</button>
                       <button className="btn btn-danger btn-xs" onClick={() => removeTeam(t.id)}>✕</button>
@@ -940,7 +1409,7 @@ function Groups({ state, update, teamById }) {
 }
 
 // ─── MATCHES ─────────────────────────────────────────────────────────────────
-function Matches({ state, update, teamById }) {
+function Matches({ state, update, teamById, isAdmin }) {
   const [activeMatch, setActiveMatch] = useState(null);
   const [editScoreModal, setEditScoreModal] = useState(null);
   const toast = useToast();
@@ -1035,7 +1504,7 @@ function Matches({ state, update, teamById }) {
 
   return (
     <div className="fade-in">
-      {activeMatch && (
+      {activeMatch && isAdmin && (
         <LiveScoreboard
           match={activeMatch}
           teamById={teamById}
@@ -1067,7 +1536,7 @@ function Matches({ state, update, teamById }) {
       ) : (
         <div style={{display:'flex',flexDirection:'column',gap:'0.75rem'}}>
           {filtered.map(m => (
-            <MatchRow key={m.id} match={m} teamById={teamById}
+            <MatchRow key={m.id} match={m} teamById={teamById} isAdmin={isAdmin}
               onStart={() => startMatch(m)}
               onOpen={() => setActiveMatch(m)}
               onStop={() => stopMatch(m.id)}
@@ -1077,12 +1546,12 @@ function Matches({ state, update, teamById }) {
           ))}
         </div>
       )}
-      {editScoreModal && <EditScoreModal match={editScoreModal} teamById={teamById} onClose={() => setEditScoreModal(null)} update={update} arr="matches" toast={toast} />}
+      {editScoreModal && isAdmin && <EditScoreModal match={editScoreModal} teamById={teamById} onClose={() => setEditScoreModal(null)} update={update} arr="matches" toast={toast} />}
     </div>
   );
 }
 
-function MatchRow({ match, teamById, onStart, onOpen, onStop, onReset, onEdit }) {
+function MatchRow({ match, teamById, onStart, onOpen, onStop, onReset, onEdit, isAdmin }) {
   const t1 = teamById[match.team1Id], t2 = teamById[match.team2Id];
   const { s1: sw1, s2: sw2 } = matchWinner(match.sets);
   const curSet = match.sets[match.currentSet] || {s1:0,s2:0};
@@ -1096,11 +1565,18 @@ function MatchRow({ match, teamById, onStart, onOpen, onStop, onReset, onEdit })
           {match.winner && <span className="badge badge-green">✓ {teamById[match.winner]?.name}</span>}
         </div>
         <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap'}}>
-          {match.status === 'upcoming' && !match.locked && <button className="btn btn-primary btn-sm" onClick={onStart}>▶ Start</button>}
-          {match.status === 'live' && <button className="btn btn-secondary btn-sm" onClick={onOpen}>📊 Scoring</button>}
-          {match.status === 'live' && <button className="btn btn-ghost btn-sm" onClick={onStop}>⏸ Pause</button>}
-          {!match.locked && <button className="btn btn-ghost btn-sm" onClick={onEdit}>✏️</button>}
-          {!match.locked && match.status !== 'upcoming' && <button className="btn btn-danger btn-sm" onClick={onReset}>↺</button>}
+          {/* Guests see a view-only indicator when live, admins get full controls */}
+          {isAdmin ? (
+            <>
+              {match.status === 'upcoming' && !match.locked && <button className="btn btn-primary btn-sm" onClick={onStart}>▶ Start</button>}
+              {match.status === 'live' && <button className="btn btn-secondary btn-sm" onClick={onOpen}>📊 Scoring</button>}
+              {match.status === 'live' && <button className="btn btn-ghost btn-sm" onClick={onStop}>⏸ Pause</button>}
+              {!match.locked && <button className="btn btn-ghost btn-sm" onClick={onEdit}>✏️</button>}
+              {!match.locked && match.status !== 'upcoming' && <button className="btn btn-danger btn-sm" onClick={onReset}>↺</button>}
+            </>
+          ) : (
+            match.status === 'live' && <span className="badge badge-red"><span className="live-dot" style={{marginRight:'4px'}}/>Watching Live</span>
+          )}
         </div>
       </div>
       <div className="match-teams" style={{marginTop:'0.75rem'}}>
@@ -1270,7 +1746,7 @@ function EditScoreModal({ match, teamById, onClose, update, arr, toast }) {
 }
 
 // ─── KNOCKOUT ─────────────────────────────────────────────────────────────────
-function Knockout({ state, update, teamById }) {
+function Knockout({ state, update, teamById, isAdmin }) {
   const [activeMatch, setActiveMatch] = useState(null);
   const [editModal, setEditModal] = useState(null);
   const toast = useToast();
@@ -1346,7 +1822,7 @@ function Knockout({ state, update, teamById }) {
   const rounds = ['Semi-Final', 'Final'];
   return (
     <div className="fade-in">
-      {activeMatch && (
+      {activeMatch && isAdmin && (
         <LiveScoreboard match={activeMatch} teamById={teamById} onClose={() => setActiveMatch(null)}
           addPoint={(t) => addPoint(activeMatch.id, t)}
           stopMatch={() => stopMatch(activeMatch.id)}
@@ -1369,7 +1845,7 @@ function Knockout({ state, update, teamById }) {
             {roundMatches.length === 0 ? (
               <div style={{color:'var(--text-muted)',fontSize:'0.9rem'}}>Waiting for teams to advance...</div>
             ) : roundMatches.map(m => (
-              <MatchRow key={m.id} match={m} teamById={teamById}
+              <MatchRow key={m.id} match={m} teamById={teamById} isAdmin={isAdmin}
                 onStart={() => startMatch(m)}
                 onOpen={() => setActiveMatch(m)}
                 onStop={() => stopMatch(m.id)}
@@ -1380,7 +1856,7 @@ function Knockout({ state, update, teamById }) {
           </div>
         );
       })}
-      {editModal && <EditScoreModal match={editModal} teamById={teamById} onClose={() => setEditModal(null)} update={update} arr="knockoutMatches" toast={toast} />}
+      {editModal && isAdmin && <EditScoreModal match={editModal} teamById={teamById} onClose={() => setEditModal(null)} update={update} arr="knockoutMatches" toast={toast} />}
     </div>
   );
 }
@@ -1683,8 +2159,21 @@ function TVMode({ state, teamById, liveMatches, upcomingMatches, onClose, time }
 }
 
 // ─── MOUNT ────────────────────────────────────────────────────────────────────
+function Root() {
+  return (
+    <AuthProvider>
+      <AuthGate />
+    </AuthProvider>
+  );
+}
+function AuthGate() {
+  const { auth } = useAuth();
+  if (!auth) return <LoginPage />;
+  return <ToastProvider><App /></ToastProvider>;
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<Root />);
 </script>
 </body>
 </html>
